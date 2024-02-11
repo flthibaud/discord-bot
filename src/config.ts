@@ -5,7 +5,7 @@ dotenv.config();
 
 const env = cleanEnv(process.env, {
   PREFIX: str({ default: "!" }),
-  BOT_TOKEN: str(),
+  BOT_TOKEN: str({ default: "" }),
   OWNER_IDS: str({ default: "" }),
 });
 
