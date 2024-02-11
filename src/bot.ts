@@ -15,19 +15,11 @@ export const rootPath = __dirname;
 (async(): Promise<void> => {
     const client: DiscordClient = new Client({
         intents: [
-            GatewayIntentBits.Guilds, // Nécessaire pour les événements et actions basiques liés aux guildes (serveurs).
-            GatewayIntentBits.GuildMessages, // Permet de recevoir des événements de messages dans les canaux de guildes.
-            GatewayIntentBits.GuildPresences, // Utilisé pour recevoir des mises à jour sur les présences des membres de la guilde, telles que le statut en ligne.
-            GatewayIntentBits.DirectMessages, // Permet de recevoir des événements de messages directs envoyés au bot.
-            GatewayIntentBits.MessageContent, // Requis pour accéder au contenu des messages, soumis à des restrictions d'accès par Discord.
-            GatewayIntentBits.DirectMessageReactions, // Permet de recevoir des événements lorsque des réactions sont ajoutées ou supprimées dans des messages directs.
-            GatewayIntentBits.GuildMembers, // Nécessaire pour recevoir des événements liés aux membres de la guilde, comme les ajouts et les mises à jour.
-            GatewayIntentBits.GuildMessageReactions, // Permet de recevoir des événements liés aux réactions sur les messages dans les canaux de guildes.
-            GatewayIntentBits.GuildWebhooks, // Utilisé pour recevoir des événements liés aux webhooks dans les guildes.
-            GatewayIntentBits.GuildVoiceStates, // Nécessaire pour les mises à jour des états dans les canaux vocaux, comme rejoindre ou quitter un canal.
-            GatewayIntentBits.GuildInvites, // Permet de recevoir des événements liés aux invitations de guilde, comme leur création ou suppression.
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.MessageContent,
         ],
-        partials: [Partials.Channel] // Permet d'interagir avec des messages qui ne sont pas stockés dans le cache, comme les messages dans des canaux partiels.
+        partials: [Partials.Channel]
     });
 
     client.messageCommands = new Map<string, MessageCommand>();
