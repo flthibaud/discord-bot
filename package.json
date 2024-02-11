@@ -1,6 +1,6 @@
 {
   "name": "discordbot-template-ts",
-  "version": "1.0.6",
+  "version": "1.0.0",
   "description": "TypeScript version of DiscordBot-Template",
   "main": "./src/bot.ts",
   "type": "module",
@@ -15,9 +15,9 @@
   "author": "RileCraft",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rilecraft/discordbot-template-ts/issues"
+    "url": "https://github.com/flthibaud/discord-bot/issues"
   },
-  "homepage": "https://github.com/rilecraft/discordbot-template-ts#readme",
+  "homepage": "https://github.com/flthibaud/discord-bot#readme",
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.2",
