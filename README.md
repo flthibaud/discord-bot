@@ -1,8 +1,8 @@
 <p>
   <img src="https://img.shields.io/badge/version-1.0.0-05122A?style=for-the-badge">
-  <img src="https://img.shields.io/github/issues/RileCraft/DiscordBot-Template-ts.svg?style=for-the-badge">
-  <img src="https://img.shields.io/github/forks/RileCraft/DiscordBot-Template-ts.svg?style=for-the-badge">
-  <img src="https://img.shields.io/github/stars/RileCraft/DiscordBot-Template-ts.svg?style=for-the-badge">
+  <img src="https://img.shields.io/github/issues/flthibaud/discord-bot.svg?style=for-the-badge">
+  <img src="https://img.shields.io/github/forks/flthibaud/discord-bot.svg?style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/flthibaud/discord-bot.svg?style=for-the-badge">
 </p>
 
 # Discord Bot Template TS
