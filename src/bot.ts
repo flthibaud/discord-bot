@@ -15,11 +15,11 @@ export const rootPath = __dirname;
 (async(): Promise<void> => {
     const client: DiscordClient = new Client({
         intents: [
-            GatewayIntentBits.Guilds,
-            GatewayIntentBits.GuildMessages,
-            GatewayIntentBits.MessageContent,
+            GatewayIntentBits.Guilds, // Nécessaire pour les événements et actions basiques liés aux guildes (serveurs).
+            GatewayIntentBits.GuildMessages, // Permet de recevoir des événements de messages dans les canaux de guildes.
+            GatewayIntentBits.MessageContent, // Requis pour accéder au contenu des messages, soumis à des restrictions d'accès par Discord.
         ],
-        partials: [Partials.Channel]
+        partials: [Partials.Channel] // Permet d'interagir avec des messages qui ne sont pas stockés dans le cache, comme les messages dans des canaux partiels.
     });
 
     client.messageCommands = new Map<string, MessageCommand>();
