@@ -68,18 +68,18 @@ For detailed documentation on command options and managers, please refer to the 
 
 ## Installation
 
-To get started with the Discord Bot Template, follow these steps:
+To get started with the Discord Bot, follow these steps:
 
-1. Clone the repository by downloading it as a ZIP file or running the command `git clone https://github.com/rilecraft/discordbot-template-ts`.
+1. Clone the repository by downloading it as a ZIP file or running the command `git clone https://github.com/flthibaud/discord-bot`.
 2. Navigate to the template's directory and run the command `npm install` (make sure npm is installed).
-3. Once all the required modules are installed, open the `src/config.ts` file and fill in the necessary information.
+3. Once all the required modules are installed, copy `.env.example` and rename it to `.env` and fill in the necessary information.
 4. Run the command `npm run build && npm run start` to start the bot.
 
 ## Contribution
 
-Contributions to the Discord Bot Template are welcome. To contribute, please follow these guidelines:
+Contributions to the Discord Bot are welcome. To contribute, please follow these guidelines:
 
-1. Fork the `develop` branch. **Important: All changes must be made to the develop branch.**
+1. Fork the `master` branch. **Important: All changes must be made to the master branch.**
 2. Make your changes in your forked repository.
-3. Open a pull request to the `develop` branch, and it will be reviewed promptly.
+3. Open a pull request to the `master` branch, and it will be reviewed promptly.
 4. If everything checks out, the pull request will be merged.
