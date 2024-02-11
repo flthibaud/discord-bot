@@ -1,25 +1,53 @@
-import commandOptionsChecker from "../structures/commandOptions/processor.js";
-import { PREFIX } from "../config.js";
-import { ClientEvent, MessageCommand } from "../types.js";
+import { ClientEvent } from "../types.js";
 import { DiscordClient, Message } from "discord.js";
+
+// Liste blanche des domaines autorisés
+const whitelist = [
+    "ext-twitch.tv",
+    "jtvnw.net",
+    "live-video.net",
+    "ttvnw.net",
+    "twitch.a2z.com",
+    "twitchcdn.net",
+    "twitchcdn-shadow.net",
+    "twitch-shadow.net",
+    "twitchsvc.net",
+    "twitchsvc-staging.tech",
+    "twitch.tv",
+];
+
+// Identifiants des rôles autorisés à poster des liens non listés
+const allowedRoles = ["ROLE_ID_1", "ROLE_ID_2"];
 
 export const Event: ClientEvent = {
     name: "messageCreate",
-    run: (message: Message, client: DiscordClient): void => {
-        if (!Array.isArray(PREFIX)) return;
-        PREFIX.forEach(async(botPrefix: string) => {
-            if (!message.content.startsWith(botPrefix)) return;
-            const commandName: string = message.content.toLowerCase().slice(botPrefix.length).trim().split(" ")[0];
-            const command: MessageCommand | undefined = client.messageCommands?.get(commandName) ?? client.messageCommands?.get(client.messageCommands_Aliases?.get(commandName) ?? "");
-            if (!command) return;
-            const args: Array<string> = message.content.slice(botPrefix.length).trim().slice(commandName.length).trim().split(" ");
-            const processedCommandOptionsChecker: boolean = await commandOptionsChecker(client, message, command, "MessageCommand");
+    run: async (message: Message, client: DiscordClient): Promise<void> => {
+        if (message.author.bot) return;
 
-            if (command?.allowInDms) return processedCommandOptionsChecker ? await command.run(client, message, args) : null;
-            else if (!message.guild) return;
-            else if (command?.allowBots) return processedCommandOptionsChecker ? await command.run(client, message, args) : null;
-            else if (message.author.bot) return;
-            else return processedCommandOptionsChecker ? await command.run(client, message, args) : null;
-        });
+        const urlPattern = /https?:\/\/[^\s]+/g;
+        const links = message.content.match(urlPattern);
+
+        if (links) {
+            // Vérifier si l'utilisateur est administrateur ou possède un rôle autorisé
+            const member = message.member;
+            const isAdminOrAllowedRole = member && (member.permissions.has("Administrator") || member.roles.cache.some(role => allowedRoles.includes(role.id)));
+
+            if (!isAdminOrAllowedRole) {
+                const isWhitelisted = links.every(link => {
+                    const url = new URL(link);
+                    return whitelist.some(domain => url.hostname.includes(domain));
+                });
+
+                if (!isWhitelisted) {
+                    try {
+                        await message.delete();
+                        await message.channel.send(`${message.author}, votre message a été supprimé car il contient un lien non autorisé.`);
+                    } catch (error) {
+                        console.error("Erreur lors de la suppression du message ou de l'envoi d'une notification à l'utilisateur.", error);
+                    }
+                    return;
+                }
+            }
+        }
     }
-}; // MessageCreate event to handle all messages and execute messageCommands (if found).
+};
